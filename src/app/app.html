@@ -1,0 +1,22 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Luokat</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <button default ion-button block (click)="selectBuilding()">Vaihda rakennus</button>
+      </ion-item>
+      <ion-item *ngFor="let class of classesArray">
+          <ion-label>{{ class.code }}</ion-label>
+          <ion-checkbox [(ngModel)]="classes[class.code].selected" (ionChange)="updateClasses()"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

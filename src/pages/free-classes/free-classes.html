@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Vapaat luokat</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+  <ion-card>
+    <ion-card-header>
+      Tilan tulee olla vapaana: {{backend.freePeriod}}h
+    </ion-card-header>
+    <ion-card-content>
+      <ion-range padding min="1" max="24" pin="true" [(ngModel)]="backend.freePeriod" color="secondary">
+        <ion-icon range-right name="checkmark" (click)="backend.saveFreePeriod(); backend.updateFreeClasses();"></ion-icon>
+      </ion-range>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let class of backend.freeClasses">
+    <ion-card-header>
+      {{class.code}}
+    </ion-card-header>
+    <ion-card-content>
+      {{class.name}}
+    </ion-card-content>
+  </ion-card>
+  </ion-list>
+</ion-content>
